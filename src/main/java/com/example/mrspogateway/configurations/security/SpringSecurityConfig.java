@@ -45,11 +45,10 @@ public class SpringSecurityConfig {
                         .requestMatchers("/api/user/page").authenticated()
                         .requestMatchers("/api/inventory/products").permitAll()
                         .requestMatchers("api/inventory/impact/event").hasRole("ADMIN")
-                        .requestMatchers("/api/inventory/**").authenticated()
+                        .requestMatchers("/api/inventory/event").authenticated()
                         .requestMatchers(
                                 "/api/user/registration",
                                 "/api/user/auth").permitAll()
-                        //.requestMatchers("/api/user/actions").authenticated()
                         .requestMatchers(
                                 "/v3/api-docs",
                                 "/swagger-ui.html",

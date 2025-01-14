@@ -84,7 +84,7 @@ const displayProducts = (products) => {
 // Добавить новый товар
 const addProduct = async () => {
     const productName = document.getElementById("product-name").value;
-    const eventType = document.getElementById("event-type").value;
+    const eventType = document.getElementById("event-type").checked;
     const quantity = parseInt(document.getElementById("quantity").value, 10);
     const price = parseInt(document.getElementById("product-price").value, 10);
     const timestamp = new Date().toISOString(); // Текущее время
@@ -102,6 +102,7 @@ const addProduct = async () => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
             },
             body: JSON.stringify(productData),
         });

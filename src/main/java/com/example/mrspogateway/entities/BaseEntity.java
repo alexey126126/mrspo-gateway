@@ -26,13 +26,13 @@ public class BaseEntity {
     @Column(name = "updated_at", nullable = false)
     OffsetDateTime updatedAt;
 
-//    @PrePersist
-//    protected void onCreate() {
-//        createdAt = OffsetDateTime.now();
-//        updatedAt = OffsetDateTime.now();
-//    }
-//    @PreUpdate
-//    protected void onUpdate() {
-//        updatedAt = OffsetDateTime.now();
-//    }
+    @PrePersist
+    protected void onCreate() {
+        createdAt = OffsetDateTime.now();
+        updatedAt = OffsetDateTime.now();
+    }
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = OffsetDateTime.now();
+    }
 }
