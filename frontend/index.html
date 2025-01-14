@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Добавим немного стилей для отображения товаров */
+        .product-list {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            max-width: 500px;
+            overflow-y: auto;
+        }
+
+        .product-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .product-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Регистрация -->
+    <h2>Регистрация</h2>
+    <input id="register-username" placeholder="Username" type="text" oninput="saveFormData()" />
+    <input id="register-password" placeholder="Password" type="password" oninput="saveFormData()"/>
+    <button onclick="register()">Register</button>
+    <script>
+        // Сохраняем данные в localStorage при вводе
+        const saveFormData = () => {
+            const username = document.getElementById("register-username").value;
+            const password = document.getElementById("register-password").value;
+
+            localStorage.setItem("register-username", username);
+            localStorage.setItem("register-password", password);
+        };
+
+        // Загружаем данные из localStorage при загрузке страницы
+        const loadFormData = () => {
+            const savedUsername = localStorage.getItem("register-username");
+            const savedPassword = localStorage.getItem("register-password");
+
+            if (savedUsername) {
+                document.getElementById("register-username").value = savedUsername;
+            }
+            if (savedPassword) {
+                document.getElementById("register-password").value = savedPassword;
+            }
+        };
+
+        // Восстанавливаем данные при загрузке страницы
+        window.onload = loadFormData;
+    </script>
+    <!-- Аутентификация -->
+    <h2>Аутентификация</h2>
+    <input id="auth-username" placeholder="Username" type="text" />
+    <input id="auth-password" placeholder="Password" type="password" />
+    <button onclick="authenticate()">Login</button>
+
+    <!-- Страница пользователя -->
+    <h2>Страница пользователя</h2>
+    <button onclick="getUserPage()">User Page</button>
+
+    <!-- Добавить новый товар -->
+    <h2>Добавить/удалить товар</h2>
+    <form id="add-product-form">
+
+        <label for="product-name">Product Name:</label>
+        <input type="text" id="product-name" required><br>
+
+        <label for="event-type">Event Type:</label>
+        <input type="text" id="event-type" required><br>
+
+        <label for="product-price">Price:</label>
+        <input type="number" id="product-price" required><br>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" min="1" required><br>
+
+        <button onclick="addProduct()">Add Product</button>
+    </form>
+
+    <!-- Получить список товаров -->
+    <h2>Получить список товаров</h2>
+    <!-- Контейнер для отображения списка товаров -->
+    <div id="product-list" class="product-list"></div>
+    <button onclick="getProducts()">View Products</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
